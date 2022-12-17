@@ -1,0 +1,67 @@
+<section class="flex flex-col">
+  <app-banner></app-banner>
+  <!--Categories-->
+  <div class="pr-[4px]">
+    <div class="h-[113px]  bg-[#1D242C] mt-[8px] rounded-[5px]">
+      <div class="flex h-[50%] px-[17px] overflow-x-auto overflow-y-hidden">
+        <div *ngFor="let providers of slotProvidersData" (click)="chooseCategoryAndSlots(providers)"
+             class="flex flex-col w-fit items-center justify-center relative mx-[35px] text-[14px] font-[400] cursor-pointer">
+          <span [ngStyle]="isActive ===  providers.name?  {'color': '#15AF44'}:{'color':'white'}"
+                class="absolute top-0 right-0 font-[500] text-white text-[11px]">{{providers?.totalGames}}</span>
+          <div class="w-fit whitespace-nowrap text-white">{{providers.name}}</div>
+          <div *ngIf="isActive ===  providers.name"
+               class="absolute bottom-1 rounded-t-lg w-[110%] h-[4px] bg-[#15AF44]"></div>
+        </div>
+      </div>
+      <div class="flex items-center  h-[50%] bg-[#272D36] rounded-b-[5px] relative text-white text-[14px] font-[500] px-[20px]">
+            <div *ngFor="let category of slotCategoriesData"  (click)="selectCategory(category)"
+                 class="w-fit whitespace-nowrap text-white px-[26px] cursor-pointer hover:bg-[#1a1e23] py-[15px] rounded"
+                 [ngStyle]="activeProvider ===  category.provider?  {'background-color': '#1a1e23'}:{}">
+              {{category.name}}
+            </div>
+        <div class="flex justify-center items-center text-white absolute right-0 pr-[15px] cursor-pointer">
+          <span >See More</span>
+          <img class="ml-[15px] mt-[5px]" src="assets/photos/extend.svg" alt="">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="slotsData.length" class="grid grid-cols-7 pt-[14px] ">
+    <div class="bg-[#252B33] h-[90%] col-span-2 row-span-2 mr-[11px]">
+      <div class="w-[100%] h-[100%] bg-center bg-no-repeat bg-cover "
+           [ngStyle]="{'background-image': 'url(' +slotsData[0]?.image + ')'}">
+        <div class="w-[100%] h-[100%] relative  activeSlot flex justify-center items-center" >
+          <div class="new-btn absolute top-[10px] left-[10px] w-[50px]
+          h-[20px] bg-[#15AF44] text-white flex items-center justify-center
+           rounded font-[500] text-[12px]"> new
+          </div>
+          <button class="outline-0 border-0 bg-[#15AF44] rounded text-white text-[16px] font-[500] play-btn"> PLAY
+          </button>
+        </div>
+      </div>
+      <div class="h-[35px] bg-[#252B33] text-white text-[14px] font-[500] pl-[11px] pt-[3px]">
+        {{slotsData[0]?.name}}
+      </div>
+    </div>
+    <div *ngFor="let slots of slotsData;let i = index" class=" col-span-1 h-fit flex mr-[11px] flex flex-col bg-[#252B33] mb-[12px]">
+      <div class="bg-[#252B33] h-[175px] w-[100%] h-[100%] bg-center bg-no-repeat bg-cover text-white relative "
+           [ngStyle]="{'background-image': 'url(' + slots.image + ')'}">
+        <div class="w-[100%] h-[100%] relative  activeSlot flex justify-center items-center" >
+          <div class="new-btn absolute top-[10px] left-[10px] w-[50px]
+          h-[20px] bg-[#15AF44] text-white flex items-center justify-center
+           rounded font-[500] text-[12px]"> new
+          </div>
+          <button class="outline-0 border-0 bg-[#15AF44] rounded text-white text-[16px] font-[500] play-btn"> PLAY
+          </button>
+        </div>
+      </div>
+      <div class="h-[35px] bg-[#252B33] text-white text-[14px] font-[500] pl-[11px] pt-[3px] ">
+        {{slots.name}}
+      </div>
+    </div>
+  </div>
+
+
+</section>
+<div class="h-[150px]"></div>
